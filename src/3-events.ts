@@ -1,7 +1,7 @@
-import { Hex, createWalletClient, getContract, http } from "viem";
+import { Hex, createWalletClient, http, publicActions, getContract } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { arbitrumSepolia } from "viem/chains";
-import funJson from "../artifacts/Fun.json";
+import funJson from "../artifacts/Fun.json"
 
 import dotenv from "dotenv";
 
@@ -11,7 +11,7 @@ dotenv.config();
 
 const privateKey = process.env.PRIVATE_KEY;
 const account = privateKeyToAccount(privateKey as Hex);
-const contractAddress = "0xf0de3c5d6fcf93f6fa4f5d201c9b42af72ed9088";
+const contractAddress = "0x23c899a3c84b7bfb7d569b049ea5f6e7e21d53d1";
 
 (async () => {
   const client = await createWalletClient({
@@ -23,11 +23,11 @@ const contractAddress = "0xf0de3c5d6fcf93f6fa4f5d201c9b42af72ed9088";
   const contract = await getContract({
     address: contractAddress,
     abi,
-    client,
-  });
+    client
+  })
 
   await contract.watchEvent.XWasChanged({
-    onLogs: (logs) => console.log(logs),
+    onLogs: (logs) => console.log(logs)
   });
 
   let x = 55n;
